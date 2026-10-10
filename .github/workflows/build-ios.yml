@@ -33,7 +33,7 @@ jobs:
 
       - name: Build unsigned iOS app
         run: |
-          xcodebuild -project ChessLabIOS.xcodeproj -scheme ChessLabIOS -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+          xcodebuild -project ChessLabIOS.xcodeproj -scheme ChessLabIOS -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO ASSETCATALOG_COMPILER_APPICON_NAME= build
 
       - name: Package IPA
         run: |
