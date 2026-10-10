@@ -17,7 +17,8 @@ jobs:
 
       - name: Install XcodeGen
         run: brew install xcodegen
-
+      - name: Extract fixed ChessLab
+        run: unzip -oq ChessLab-iOS-Fixed-Playable.zip -d .
       - name: Generate Xcode project
         run: xcodegen generate
 
