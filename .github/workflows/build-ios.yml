@@ -7,13 +7,12 @@ on:
     paths:
       - "ChessLabIOS/**"
       - "project.yml"
-      - "ChessLab-iOS-Fixed-Playable.zip"
+      - "ChessLab-iOS-Original-Features.zip"
       - ".github/workflows/build-ios.yml"
 
 jobs:
   build:
     runs-on: macos-15
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,17 +20,13 @@ jobs:
       - name: Install XcodeGen
         run: brew install xcodegen
 
-      - name: Extract fixed ChessLab
-        run: unzip -oq ChessLab-iOS-Fixed-Playable.zip -d .
-
-      - name: Remove duplicate piece images
-        run: |
-          find ChessLabIOS/Assets.xcassets -name '*.png' ! -name 'piece.png' -delete
+      - name: Extract ChessLab with analysis
+        run: unzip -oq ChessLab-iOS-Original-Features.zip -d .
 
       - name: Generate Xcode project
         run: xcodegen generate --spec project.yml
 
-      - name: Build unsigned iOS app
+      - name: Build iPhone app
         run: |
           xcodebuild -project ChessLabIOS.xcodeproj -scheme ChessLabIOS -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build CODE_SIGNING_ALLOWED=NO ASSETCATALOG_COMPILER_APPICON_NAME= build
 
